@@ -1,39 +1,55 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
+import UserMenuDropdown from './UserMenuDropdown';
+import Avatar from './Avatar';
 
 export default class User extends Component {
+  conteinerRef = createRef();
+
   state = {
-    userMenuIsShown: true,
+    isDropdownOpen: false,
   };
 
-  onShowClick = () => {
-    const { userMenuIsShown } = this.state;
-    this.setState({
-      userMenuIsShown: !userMenuIsShown,
-    });
+  componentDidMount() {
+    window.addEventListener('click', this.handleWindowClick);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { isDropdownOpen } = this.state;
+    return nextState.isDropdownOpen !== isDropdownOpen;
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.handleWindowClick);
+  }
+
+  handleWindowClick = e => {
+    const { isDropdownOpen } = this.state;
+    const IsTargetInConteiner = this.conteinerRef.current.contains(e.target);
+    if (isDropdownOpen && !IsTargetInConteiner) {
+      this.closeDropdown();
+    }
+  };
+
+  closeDropdown = () => {
+    this.setState({ isDropdownOpen: false });
+  };
+
+  openDropdown = () => {
+    this.setState({ isDropdownOpen: true });
   };
 
   render() {
-    const { name } = this.props;
-    const { userMenuIsShown } = this.state;
+    const { avatar, name } = this.props;
+    const { isDropdownOpen } = this.state;
     return (
-      <div>
-        <i onClick={this.onShowClick} role="presentation">
-          <img className="" alt={name} />
-        </i>
-
-        {userMenuIsShown ? (
-          <ul className="userMenu">
-            <li className="userMenu-item">
-              <a href="wdefgwsw">Account</a>
-            </li>
-            <li className="userMenu-item">
-              <a href="wdefgwsw">Order History</a>
-            </li>
-            <li className="userMenu-item">
-              <a href="wdefgwsw">Meal Planner</a>
-            </li>
-          </ul>
-        ) : null}
+      <div
+        onClick={this.openDropdown}
+        className="UserMenu"
+        ref={this.conteinerRef}
+      >
+        <Avatar img={avatar} className="Avatar" />
+        <span className="UserName">{name}</span>
+        {isDropdownOpen && <UserMenuDropdown />}
       </div>
     );
   }

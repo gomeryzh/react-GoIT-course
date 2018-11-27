@@ -4,7 +4,7 @@ const AppNav = ({ appNavList }) => (
   <ul>
     {appNavList.map(({ id, text }) => (
       <li key={id}>
-        <a href="google.com">{text}</a>
+        <a href="/">{text}</a>
       </li>
     ))}
   </ul>

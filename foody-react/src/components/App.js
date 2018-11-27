@@ -3,6 +3,7 @@ import AppHeader from './AppHeader';
 import OrderHistory from './OrderHistory';
 import Menu from './Menu';
 import Authentication from './Authentication';
+import HandleModal from './HandleModal';
 
 export default class App extends Component {
   state = {};
@@ -11,6 +12,7 @@ export default class App extends Component {
     return (
       <div>
         <AppHeader />
+        <HandleModal />
         <Authentication />
         <Menu />
         <OrderHistory />

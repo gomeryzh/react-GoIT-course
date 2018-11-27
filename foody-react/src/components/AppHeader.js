@@ -1,26 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Logo from './Logo';
 import AppNav from './AppNav';
 import User from './User';
+import LogoImg from '../logo.jpg';
+import avatar from '../avatar.png';
 
-export default class AppHeader extends Component {
-  state = {
-    appNavList: [
-      { id: 'id-1', text: 'menu' },
-      { id: 'id-2', text: 'about' },
-      { id: 'id-3', text: 'contacts' },
-      { id: 'id-4', text: 'delivery' },
-    ],
-  };
+const appNavList = [
+  { id: 'id-1', text: 'menu' },
+  { id: 'id-2', text: 'about' },
+  { id: 'id-3', text: 'contacts' },
+  { id: 'id-4', text: 'delivery' },
+];
 
-  render() {
-    const { appNavList } = this.state;
-    return (
-      <div>
-        <Logo />
-        <AppNav appNavList={appNavList} />
-        <User name="Bob Ross" />
-      </div>
-    );
-  }
-}
+const AppHeader = () => (
+  <header className="Header">
+    <div className="Header__logo">
+      <Logo img={LogoImg} width={100} heigth={100} />
+    </div>
+    <div className="Header__usermenu">
+      <AppNav appNavList={appNavList} />
+    </div>
+    <div>
+      <User avatar={avatar} name="Bob Ross" />
+    </div>
+  </header>
+);
+
+export default AppHeader;
