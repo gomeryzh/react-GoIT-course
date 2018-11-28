@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AppHeader from './AppHeader';
-import OrderHistory from './OrderHistory';
+
 import Menu from './Menu';
 import Authentication from './Authentication';
 import HandleModal from './HandleModal';
@@ -15,7 +15,6 @@ export default class App extends Component {
         <HandleModal />
         <Authentication />
         <Menu />
-        <OrderHistory />
       </div>
     );
   }

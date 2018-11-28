@@ -5,6 +5,7 @@ export default class Modal extends Component {
 
   componentDidMount() {
     window.addEventListener('click', this.handleWindowClick);
+    window.addEventListener('keydown', this.handleKeyPress);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -14,15 +15,21 @@ export default class Modal extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('click', this.handleWindowClick);
+    window.removeEventListener('keydown', this.handleKeyPress);
   }
 
   handleWindowClick = e => {
-    const { isModalOpen } = this.props;
-    const { onClose } = this.props;
-    const isTargetInModalConteiner = this.ModalConteinerRef.current.contains(
-      e.target,
-    );
-    if (isModalOpen && isTargetInModalConteiner) {
+    const { isModalOpen, onClose } = this.props;
+    const targetIsBackdrop = e.target === this.ModalConteinerRef.current;
+
+    if (isModalOpen && targetIsBackdrop) {
+      onClose();
+    }
+  };
+
+  handleKeyPress = e => {
+    const { isModalOpen, onClose } = this.props;
+    if (isModalOpen && e.key === 'Escape') {
       onClose();
     }
   };

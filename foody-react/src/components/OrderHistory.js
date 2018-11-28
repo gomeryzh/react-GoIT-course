@@ -1,8 +1,7 @@
 import React from 'react';
 import Order from './Order';
-import history from '../order-history.json';
 
-const OrderHistory = () => (
+const OrderHistory = ({ history, onDelete, onShowMore }) => (
   <table>
     <thead>
       <tr>
@@ -20,6 +19,8 @@ const OrderHistory = () => (
           price={price}
           address={address}
           rating={rating}
+          onDelete={() => onDelete(id)}
+          onShowMore={() => onShowMore(id)}
         />
       ))}
     </tbody>

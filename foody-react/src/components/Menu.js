@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import MenuList from './MenuList';
 import MenuFilter from './MenuFilter';
 import CategorySelector from './CategorySelector';
+import OrderHistory from './OrderHistory';
+import * as API from '../services/orderHistory-api';
 import menu from '../menu.json';
 
 const filterMenu = (filter, menuJson) =>
@@ -14,14 +16,36 @@ export default class Menu extends Component {
     filter: '',
     categories: ['fish', 'meet', 'fruits'],
     category: 'meet',
+    orders: [],
   };
 
-  handleAddFilter = filter => {
-    this.setState(prevState => ({
-      categories: [{ filter }, ...prevState.categories],
-    }));
-    this.setState({ filter: '' });
+  componentDidMount = () => {
+    API.getOrderHistory().then(orders => {
+      this.setState({ orders });
+    });
   };
+
+  handleDeleteOrder = id => {
+    API.deleteOrder(id).then(isOk => {
+      if (!isOk) return;
+      this.setState(({ orders }) => {
+        orders.filter(order => order.id !== id);
+      });
+    });
+  };
+
+  handleShowMore = id => {
+    API.getOrderHistoryById(id).then(item => {
+      console.log(item);
+    });
+  };
+
+  // handleAddFilter = filter => {
+  //   this.setState(prevState => ({
+  //     categories: [{ filter }, ...prevState.categories],
+  //   }));
+  //   this.setState({ filter: '' });
+  // };
 
   handleFilterChange = ({ target: { value } }) => {
     this.setState({ filter: value });
@@ -32,7 +56,7 @@ export default class Menu extends Component {
   };
 
   render() {
-    const { filter, categories, category } = this.state;
+    const { filter, categories, category, orders } = this.state;
     const filteredMenu = filterMenu(filter, menu);
     return (
       <div>
@@ -45,6 +69,11 @@ export default class Menu extends Component {
         <MenuFilter filter={filter} onFilterChange={this.handleFilterChange} />
         {/* <FilterList categories={categories} /> */}
         <MenuList menu={filteredMenu} />
+        <OrderHistory
+          history={orders}
+          onShowMore={this.handleShowMore}
+          onDelete={this.handleDeleteOrder}
+        />
       </div>
     );
   }
