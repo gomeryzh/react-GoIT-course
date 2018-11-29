@@ -36,15 +36,14 @@ export default class Modal extends Component {
   };
 
   render() {
-    const { onClose } = this.props;
+    const {
+      onClose,
+      text = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis quidem in ipsa aperiam quasi sint nulla assumenda quia consequatur eaque.',
+    } = this.props;
     return (
       <div className={s.Backdrop} ref={this.ModalConteinerRef}>
         <div className={s.ModalWindow}>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Voluptatibus voluptate beatae est ipsum, non ad totam ut iure porro
-            molestias?Backdrop
-          </p>
+          <p>{text}</p>
           <button type="button" className={s.blue} onClick={onClose}>
             Close
           </button>

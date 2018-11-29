@@ -3,8 +3,11 @@ import MenuList from './MenuList';
 import MenuFilter from './MenuFilter';
 import CategorySelector from './CategorySelector';
 import OrderHistory from './OrderHistory';
+import Modal from './Modal/Modal';
 import * as API from '../services/orderHistory-api';
 import menu from '../menu.json';
+import Loader from './Modal/Loader/Loader';
+import OrderHistoryForm from './OrderHistoryForm';
 
 const filterMenu = (filter, menuJson) =>
   menuJson.filter(menuItem =>
@@ -17,6 +20,9 @@ export default class Menu extends Component {
     categories: ['fish', 'meet', 'fruits'],
     category: 'meet',
     orders: [],
+    isModalOpen: false,
+    isLoading: false,
+    orderDetails: '',
   };
 
   componentDidMount = () => {
@@ -25,33 +31,36 @@ export default class Menu extends Component {
     });
   };
 
+  handleCloseModal = () => {
+    this.setState({ isModalOpen: false });
+  };
+
   handleDeleteOrder = id => {
+    this.setState({ isLoading: true });
     API.deleteOrder(id)
       .then(isOk => {
         if (!isOk) return;
         this.setState(state => ({
           orders: state.orders.filter(order => order.id !== id),
+          isLoading: false,
         }));
       })
       .catch(error => console.log(error));
-
-    // API.deleteOrder(id).then(isOk => {
-    //   if (!isOk) return;
-    //   this.setState(({ orders }) => {
-    //     orders.filter(order => order.id !== id);
-    //   });
-    // });
   };
 
   handleShowMore = id => {
+    this.setState({ isLoading: true });
     API.getOrderHistoryById(id).then(item => {
-      console.log(item);
+      const obj = JSON.stringify(item);
+      this.setState({ isModalOpen: true, orderDetails: obj, isLoading: false });
     });
   };
 
-  handleAddNewOrder = () => {
+  handleAddNewOrder = e => {
+    this.setState({ isLoading: true });
+    e.preventDefault();
     const order = {
-      date: Math.random(),
+      date: Date.now(),
       price: Math.random(),
       address: '108 Quinn Plains',
       rating: 10,
@@ -60,6 +69,7 @@ export default class Menu extends Component {
     API.addNewOrder(order).then(newOrder => {
       this.setState(state => ({
         orders: [...state.orders, newOrder],
+        isLoading: false,
       }));
     });
   };
@@ -79,8 +89,20 @@ export default class Menu extends Component {
     this.setState({ category: e.target.value });
   };
 
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+  };
+
   render() {
-    const { filter, categories, category, orders } = this.state;
+    const {
+      filter,
+      categories,
+      category,
+      orders,
+      isModalOpen,
+      orderDetails,
+      isLoading,
+    } = this.state;
     const filteredMenu = filterMenu(filter, menu);
     return (
       <div>
@@ -96,11 +118,20 @@ export default class Menu extends Component {
         <button type="button" onClick={this.handleAddNewOrder}>
           Add Order
         </button>
+        {isLoading && <Loader />}
+        <OrderHistoryForm onAddNewOrder={this.handleAddNewOrder} />
         <OrderHistory
           history={orders}
           onShowMore={this.handleShowMore}
           onDelete={this.handleDeleteOrder}
         />
+        {isModalOpen && (
+          <Modal
+            text={orderDetails}
+            isModalOpen={isModalOpen}
+            onClose={this.handleCloseModal}
+          />
+        )}
       </div>
     );
   }
