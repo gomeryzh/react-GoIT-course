@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react';
+import s from './Modal.module.css';
 
 export default class Modal extends Component {
   ModalConteinerRef = createRef();
@@ -37,14 +38,14 @@ export default class Modal extends Component {
   render() {
     const { onClose } = this.props;
     return (
-      <div className="Backdrop" ref={this.ModalConteinerRef}>
-        <div className="ModalWindow">
+      <div className={s.Backdrop} ref={this.ModalConteinerRef}>
+        <div className={s.ModalWindow}>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Voluptatibus voluptate beatae est ipsum, non ad totam ut iure porro
             molestias?Backdrop
           </p>
-          <button type="button" onClick={onClose}>
+          <button type="button" className={s.blue} onClick={onClose}>
             Close
           </button>
         </div>

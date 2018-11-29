@@ -26,17 +26,41 @@ export default class Menu extends Component {
   };
 
   handleDeleteOrder = id => {
-    API.deleteOrder(id).then(isOk => {
-      if (!isOk) return;
-      this.setState(({ orders }) => {
-        orders.filter(order => order.id !== id);
-      });
-    });
+    API.deleteOrder(id)
+      .then(isOk => {
+        if (!isOk) return;
+        this.setState(state => ({
+          orders: state.orders.filter(order => order.id !== id),
+        }));
+      })
+      .catch(error => console.log(error));
+
+    // API.deleteOrder(id).then(isOk => {
+    //   if (!isOk) return;
+    //   this.setState(({ orders }) => {
+    //     orders.filter(order => order.id !== id);
+    //   });
+    // });
   };
 
   handleShowMore = id => {
     API.getOrderHistoryById(id).then(item => {
       console.log(item);
+    });
+  };
+
+  handleAddNewOrder = () => {
+    const order = {
+      date: Math.random(),
+      price: Math.random(),
+      address: '108 Quinn Plains',
+      rating: 10,
+    };
+
+    API.addNewOrder(order).then(newOrder => {
+      this.setState(state => ({
+        orders: [...state.orders, newOrder],
+      }));
     });
   };
 
@@ -69,6 +93,9 @@ export default class Menu extends Component {
         <MenuFilter filter={filter} onFilterChange={this.handleFilterChange} />
         {/* <FilterList categories={categories} /> */}
         <MenuList menu={filteredMenu} />
+        <button type="button" onClick={this.handleAddNewOrder}>
+          Add Order
+        </button>
         <OrderHistory
           history={orders}
           onShowMore={this.handleShowMore}

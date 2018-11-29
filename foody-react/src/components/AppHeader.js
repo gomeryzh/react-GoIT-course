@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from './Logo';
-import AppNav from './AppNav';
+import AppNav from './Navigation/AppNav';
 import User from './User';
 import LogoImg from '../logo.jpg';
 import avatar from '../avatar.png';

@@ -1,0 +1,63 @@
+.link {
+  border-bottom: 2px dotted #55acee;
+  text-decoration: none;
+  color: #55acee;
+  transition: 0.3s;
+}
+.link:hover {
+  color: #2ecc71;
+  border-bottom: 2px dotted #2ecc71;
+}
+.btn {
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 16px;
+  transition: 0.3s;
+  display: inline-block;
+}
+.btn:hover {
+  cursor: url(http://cur.cursors-4u.net/symbols/sym-1/sym46.cur), auto;
+}
+.blue {
+  composes: btn;
+  color: #55acee;
+  border: 2px #55acee solid;
+}
+
+.blue:hover {
+  background-color: #55acee;
+  color: #fff;
+}
+
+.purple {
+  composes: btn;
+  color: #9b59b6;
+  border: 2px #9b59b6 solid;
+}
+
+.purple:hover {
+  color: #fff;
+  background-color: #9b59b6;
+}
+
+.Backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ModalWindow {
+  max-width: 600px;
+  min-height: 300px;
+  background-color: #fff;
+  padding: 16px;
+}

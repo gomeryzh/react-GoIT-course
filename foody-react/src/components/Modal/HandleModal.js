@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from './Modal';
+import s from './Modal.module.css';
 
 export default class HandleModal extends Component {
   state = { isModalOpen: false };
@@ -16,7 +17,11 @@ export default class HandleModal extends Component {
     const { isModalOpen } = this.state;
     return (
       <div>
-        <button type="button" onClick={this.handleOpenModal}>
+        <button
+          type="button"
+          className={s.purple}
+          onClick={this.handleOpenModal}
+        >
           Open Modal
         </button>
         {isModalOpen && (
