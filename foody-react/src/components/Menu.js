@@ -68,13 +68,6 @@ export default class Menu extends Component {
     });
   };
 
-  // handleAddFilter = filter => {
-  //   this.setState(prevState => ({
-  //     categories: [{ filter }, ...prevState.categories],
-  //   }));
-  //   this.setState({ filter: '' });
-  // };
-
   handleFilterChange = ({ target: { value } }) => {
     this.setState({ filter: value });
   };
@@ -101,13 +94,8 @@ export default class Menu extends Component {
           category={category}
           onCategoryChange={this.handleCategoryChange}
         />
-        {/* <FilterEditor text={filter} onAddFilter={this.handleAddFilter} /> */}
         <MenuFilter filter={filter} onFilterChange={this.handleFilterChange} />
-        {/* <FilterList categories={categories} /> */}
         <MenuList menu={filteredMenu} />
-        <button type="button" onClick={this.handleAddNewOrder}>
-          Add Order
-        </button>
         {isLoading && <Loader />}
         <OrderHistoryForm handleAddNewOrder={this.handleAddNewOrder} />
         <OrderHistory

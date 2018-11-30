@@ -43,34 +43,11 @@
       "rating": 2
     },
     {
-      "price": "dsfs",
-      "address": "dfsdfsd",
+      "price": "fsdfsd",
+      "address": "fsdfs",
       "rating": "fsdfs",
-      "id": 6
-    },
-    {
-      "price": "wefwef",
-      "address": "wefwef",
-      "rating": "sdfsdfs",
-      "id": 7
-    },
-    {
-      "price": "fwefw",
-      "address": "efwefwf",
-      "rating": "sdfsdfsdf",
-      "id": 8
-    },
-    {
-      "price": "wefwef",
-      "address": "wefwefwef",
-      "rating": "sdfsdfsdf",
-      "id": 9
-    },
-    {
-      "price": "wefw",
-      "address": "efwefw",
-      "rating": "efw",
-      "id": 10
+      "date": 1543597056589,
+      "id": 11
     }
   ]
 }
