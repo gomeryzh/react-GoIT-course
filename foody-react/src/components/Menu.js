@@ -56,17 +56,11 @@ export default class Menu extends Component {
     });
   };
 
-  handleAddNewOrder = e => {
+  handleAddNewOrder = order => {
     this.setState({ isLoading: true });
-    e.preventDefault();
-    const order = {
-      date: Date.now(),
-      price: Math.random(),
-      address: '108 Quinn Plains',
-      rating: 10,
-    };
 
     API.addNewOrder(order).then(newOrder => {
+      console.log(newOrder);
       this.setState(state => ({
         orders: [...state.orders, newOrder],
         isLoading: false,
@@ -87,10 +81,6 @@ export default class Menu extends Component {
 
   handleCategoryChange = e => {
     this.setState({ category: e.target.value });
-  };
-
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
   };
 
   render() {
@@ -119,7 +109,7 @@ export default class Menu extends Component {
           Add Order
         </button>
         {isLoading && <Loader />}
-        <OrderHistoryForm onAddNewOrder={this.handleAddNewOrder} />
+        <OrderHistoryForm handleAddNewOrder={this.handleAddNewOrder} />
         <OrderHistory
           history={orders}
           onShowMore={this.handleShowMore}

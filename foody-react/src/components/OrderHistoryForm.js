@@ -14,8 +14,9 @@ export default class OrderHistoryForm extends Component {
   };
 
   handleFormSubmit = e => {
+    const { handleAddNewOrder } = this.props;
     e.preventDefault();
-    console.log(this.state);
+    handleAddNewOrder(this.state);
     this.reset();
   };
 
@@ -25,7 +26,6 @@ export default class OrderHistoryForm extends Component {
 
   render() {
     const { price, address, rating } = this.state;
-    const { onAddNewOrder } = this.props;
     return (
       <div>
         <form>
@@ -59,7 +59,9 @@ export default class OrderHistoryForm extends Component {
               onChange={this.handleChange}
             />
           </label>
-          <button onClick={() => onAddNewOrder(this.state)}>Push it</button>
+          <button type="submit" onClick={this.handleFormSubmit}>
+            Push it
+          </button>
         </form>
       </div>
     );
