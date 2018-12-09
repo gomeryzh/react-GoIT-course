@@ -1,52 +1,26 @@
-import React, { Component } from 'react';
-import v4 from 'uuid/v4';
-import NotesList from './NotesList';
-import NoteEditor from './NoteEditor';
-import NotesFilter from './NotesFilter';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Title from './Pages/Title';
+import Nav from './Pages/Nav';
+import HomePage from './Pages/HomePage';
+import ArticlesPage from './Pages/ArticlesPage';
+import ArticlePage from './Pages/ArticlePage';
+import AboutPage from './Pages/AboutPage';
+import NotFound from './Pages/404Page';
 
-const filterNotes = (filter, notes) => {
-  return notes.filter(note =>
-    note.text.toLowerCase().includes(filter.toLowerCase()),
-  );
-};
+const App = () => (
+  <>
+    <Title text="React Router Basics" />
+    <Nav />
 
-export default class App extends Component {
-  state = {
-    notes: [
-      { id: 'id-1', text: 'JS' },
-      { id: 'id-2', text: 'React' },
-      { id: 'id-3', text: 'React Router' },
-      { id: 'id-4', text: 'Redux' },
-    ],
-    filter: '',
-  };
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route exact path="/articles" component={ArticlesPage} />
+      <Route path="/articles/:id" component={ArticlePage} />
+      <Route path="/about" component={AboutPage} />
+      <Route component={NotFound} />
+    </Switch>
+  </>
+);
 
-  handleAddNote = text => {
-    this.setState(prevState => ({
-      notes: [{ id: v4(), text }, ...prevState.notes],
-    }));
-  };
-
-  handleDeleteNote = id => {
-    this.setState(prevState => ({
-      notes: prevState.notes.filter(note => note.id !== id),
-    }));
-  };
-
-  handleFilterChange = ({ target }) => {
-    const { value } = target;
-    this.setState({ filter: value });
-  };
-
-  render() {
-    const { notes, filter } = this.state;
-    const filteredNotes = filterNotes(filter, notes);
-    return (
-      <div>
-        <NoteEditor onAddNote={this.handleAddNote} />
-        <NotesFilter filter={filter} onFilterChange={this.handleFilterChange} />
-        <NotesList onDeleteNote={this.handleDeleteNote} notes={filteredNotes} />
-      </div>
-    );
-  }
-}
+export default App;
