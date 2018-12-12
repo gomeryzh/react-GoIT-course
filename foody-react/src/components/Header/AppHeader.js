@@ -1,9 +1,9 @@
 import React from 'react';
 import Logo from './Logo';
-import AppNav from './Navigation/AppNav';
-import User from './User';
-import LogoImg from '../logo.jpg';
-import avatar from '../avatar.png';
+import AppNav from '../Navigation/AppNav';
+import User from './UserMenu/User';
+import LogoImg from './UserMenu/logo.jpg';
+import avatar from './UserMenu/avatar.png';
 
 const appNavList = [
   { id: 'id-1', text: 'menu' },

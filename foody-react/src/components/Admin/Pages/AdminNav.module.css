@@ -1,0 +1,13 @@
+.active {
+  color: turquoise;
+  text-decoration: none;
+}
+.list {
+  list-style: none;
+  display: flex;
+  align-content: flex-start;
+}
+.listItem {
+  display: block;
+  padding-right: 10px;
+}
