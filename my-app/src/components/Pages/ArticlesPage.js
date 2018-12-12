@@ -17,7 +17,7 @@ export default class ArticlesPage extends Component {
     if (!category) {
       return this.props.history.replace({
         pathname: this.props.location.pathname,
-        search: 'category = all',
+        search: 'category=all',
       });
     }
 
@@ -47,7 +47,6 @@ export default class ArticlesPage extends Component {
 
   render() {
     const { articles } = this.state;
-    const { match } = this.props;
     console.log(queryString.parse(this.props.location.search));
     const currentCategory = getCategoryFromProps(this.props);
     return (
@@ -58,7 +57,7 @@ export default class ArticlesPage extends Component {
           value={currentCategory}
           onChange={this.handleOnCategoryChange}
         />
-        <ArticleList articles={articles} match={match} />
+        <ArticleList articles={articles} />
       </div>
     );
   }
