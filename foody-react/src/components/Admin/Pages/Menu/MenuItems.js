@@ -13,10 +13,13 @@ export default class MenuItems extends Component {
   };
 
   componentDidMount = () => {
-    api.getAllMenuItems(MenuDb.menu).then(items => console.log(items));
+    api
+      .getAllMenuItems(MenuDb.menu)
+      .then(menuItems => this.setState({ menuItems }));
     console.log(getCategoryFromProps);
+    const { menuItems } = this.state;
+    console.log(menuItems);
     // console.log(menuItems);
-    // this.setState({ menuItems });
   };
 
   render() {
