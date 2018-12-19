@@ -36,6 +36,12 @@ class MenuItemsPage extends Component {
     const prevCategory = getCategoryFromProps(prevProps);
     const nextCategory = getCategoryFromProps(this.props);
 
+    if (!nextCategory) {
+      const menuItems = await api.getAllMenuItems();
+      this.setState({ menuItems });
+      return;
+    }
+
     if (prevCategory === nextCategory) return;
 
     const itemsByCategory = await api.getMenuItemsWithCategory(nextCategory);
