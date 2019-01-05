@@ -1,33 +1,54 @@
 import shortid from 'shortid';
 import {
-  ADD,
-  DELETE,
-  TOGGLE_COMPLETED,
+  ADD_SUCCESS,
+  DELETE_SUCCESS,
+  TOGGLE_COMPLETED_SUCCESS,
   CHANGE_FILTER,
+  FETCH_REQUEST,
+  FETCH_SUCCESS,
+  FETCH_ERROR,
 } from './notesActionsTypes';
-
-const addNote = text => ({
-  type: ADD,
-  payload: {
-    id: shortid.generate(),
-    text,
-    completed: false,
-  },
-});
-
-const deleteNote = id => ({
-  type: DELETE,
-  payload: id,
-});
-
-const toggleNote = id => ({
-  type: TOGGLE_COMPLETED,
-  payload: id,
-});
 
 const filterNote = filter => ({
   type: CHANGE_FILTER,
   payload: filter,
 });
 
-export { addNote, deleteNote, toggleNote, filterNote };
+const fetchRequest = () => ({
+  type: FETCH_REQUEST,
+});
+
+const fetchSuccess = notes => ({
+  type: FETCH_SUCCESS,
+  payload: notes,
+});
+
+const addNoteSuccess = note => ({
+  type: ADD_SUCCESS,
+  payload: note,
+});
+
+const deleteNoteSuccess = id => ({
+  type: DELETE_SUCCESS,
+  payload: id,
+});
+
+const toggleNoteSuccess = id => ({
+  type: TOGGLE_COMPLETED_SUCCESS,
+  payload: id,
+});
+
+const fetchError = error => ({
+  type: FETCH_ERROR,
+  payload: error,
+});
+
+export {
+  addNoteSuccess,
+  deleteNoteSuccess,
+  toggleNoteSuccess,
+  filterNote,
+  fetchRequest,
+  fetchSuccess,
+  fetchError,
+};
