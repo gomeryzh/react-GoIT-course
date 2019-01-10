@@ -32,7 +32,7 @@ class App extends Component {
     componentDidMount() {
         this.props.fetchData(data);
     }
-cd ..
+
     render() {
         return (
             <>

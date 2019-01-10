@@ -15,9 +15,10 @@ const UserPostList = ({ id, posts }) => (
     </div>
 );
 
-const mapStateToProps = (state, ownProps) => ({
-    posts: selectors.getPostsWithAuthor(state, ownProps),
-});
+const mapStateToProps = () => {
+    const getStateFromProps = selectors.makeGetPostsWithAuthor();
+    return (state, ownProps) => ({ posts: getStateFromProps(state, ownProps) });
+};
 
 export default compose(
     connect(mapStateToProps),
