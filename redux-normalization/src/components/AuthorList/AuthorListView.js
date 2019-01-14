@@ -7,7 +7,7 @@ import s from './AuthorList.module.css';
 const getItemStyles = (id, activeId) =>
     id === activeId ? s.activeItem : s.item;
 
-const AuthorList = ({ authors, selectAuthor, activeAuthorId }) =>
+const AuthorList = ({ authors = [], selectAuthor, activeAuthorId }) =>
     authors.length > 0 ? (
         <ul className={s.list}>
             {authors.map(author => (

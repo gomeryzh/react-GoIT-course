@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import PostList from '../PostList/PostListContainer';
+import PostList from '../PostList/PostListView';
 import AuthorList from '../AuthorList/AuthorListContainer';
 import * as actions from '../../redux/actions';
 import s from './App.module.css';

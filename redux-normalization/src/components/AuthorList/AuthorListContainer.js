@@ -5,7 +5,7 @@ import * as actions from '../../redux/actions';
 
 const mapState = state => ({
     authors: selectors.getAllAuthors(state),
-    activeAuthorId: selectors.getSelectedAuthorId(state),
+    activeAuthorId: selectors.getActiveAuthorId(state),
 });
 
 const mapDispatch = {

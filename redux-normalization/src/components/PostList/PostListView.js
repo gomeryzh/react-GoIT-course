@@ -6,7 +6,7 @@ import s from './PostList.module.css';
 // import passProps from '../hoc/passProps';
 // import posts from '../../posts.json';
 
-const PostList = ({ posts, deletePost }) =>
+const PostList = ({ posts = [], deletePost }) =>
     posts.length > 0 ? (
         <ul className={s.list}>
             {posts.map(post => (
