@@ -11,3 +11,5 @@ export const getAllAuthors = state => {
     const res = ids.map(id => entities[id]);
     return res;
 };
+
+const getAllPostsEntities = state => this.state.entities.posts;
