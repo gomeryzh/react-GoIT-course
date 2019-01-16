@@ -7,7 +7,9 @@ const mapState = state => ({
     products: selecors.getCartProducts(state),
 });
 
-const mapDispatch = { removeFromCart: actions.removeFromCart };
+const mapDispatch = {
+    removeFromCart: actions.removeFromCart,
+};
 
 export default connect(
     mapState,
