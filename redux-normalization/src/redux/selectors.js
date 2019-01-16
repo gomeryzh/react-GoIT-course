@@ -12,4 +12,30 @@ export const getAllAuthors = state => {
     return res;
 };
 
-const getAllPostsEntities = state => this.state.entities.posts;
+const getAllPostsEntities = state => state.entities.posts;
+
+const getAllPostsIds = state => state.posts;
+
+export const getAuthorPosts = state => {
+    const activeAuthorId = getActiveAuthorId(state);
+    const postEntities = getAllPostsEntities(state);
+    const postsIds = getAllPostsIds(state);
+
+    const activeAuthorPosts = postsIds.reduce((acc, postId) => {
+        const post = postEntities[postId];
+        if (post.author === activeAuthorId) acc.push(post);
+        return acc;
+    }, []);
+
+    // const activeAuthorPosts = [];
+
+    // postsIds.forEach(postId => {
+    //     const post = postEntities[postId];
+
+    //     if (post.author === activeAuthorId) {
+    //         activeAuthorPosts.push(post);
+    //     }
+    // });
+
+    return activeAuthorPosts;
+};
