@@ -15,16 +15,25 @@ export const getProducts = createSelector(
 const getCartProductIds = state => state.cart.ids;
 const getCartProductAmounts = state => state.cart.amount;
 
-export const getCartProductsAmount = createSelector(
-    getCartProductIds,
-    ids => ids.length,
-);
-
 export const getCartProducts = createSelector(
     [getCartProductIds, getCartProductAmounts, getProductsEntities],
-    (ids, amounts, entities) =>
+    (ids, amount, productEntities) =>
         ids.map(id => ({
-            ...entities[id],
-            amount: amounts[id],
+            ...productEntities[id],
+            amount: amount[id],
         })),
 );
+
+// export const getCartProductsAmount = createSelector(
+//     getCartProductIds,
+//     ids => ids.length,
+// );
+
+// export const getCartProducts = createSelector(
+//     [getCartProductIds, getCartProductAmounts, getProductsEntities],
+//     (ids, amounts, entities) =>
+//         ids.map(id => ({
+//             ...entities[id],
+//             amount: amounts[id],
+//         })),
+// );

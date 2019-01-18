@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Cart.module.css';
 
-const Cart = ({ products = [] }) =>
+const Cart = ({ products = [], removeFromCart }) =>
     products.length > 0 ? (
         <table className={s.table}>
             <tbody>
@@ -14,7 +14,13 @@ const Cart = ({ products = [] }) =>
                             <button>-</button>
                         </td>
                         <td>
-                            <button>Удалить</button>
+                            <button
+                                onClick={() => {
+                                    removeFromCart(id);
+                                }}
+                            >
+                                Удалить
+                            </button>
                         </td>
                     </tr>
                 ))}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import Products from '../Products/ProductsContainer';
-import Cart from '../Cart/CartConatiner';
+import Cart from '../Cart/CartContainer';
 
 import s from './App.module.css';
 
