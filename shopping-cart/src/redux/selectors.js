@@ -24,10 +24,10 @@ export const getCartProducts = createSelector(
         })),
 );
 
-// export const getCartProductsAmount = createSelector(
-//     getCartProductIds,
-//     ids => ids.length,
-// );
+export const getCartProductsAmount = createSelector(
+    getCartProductIds,
+    ids => ids.length,
+);
 
 // export const getCartProducts = createSelector(
 //     [getCartProductIds, getCartProductAmounts, getProductsEntities],

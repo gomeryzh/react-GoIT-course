@@ -9,6 +9,8 @@ const mapState = state => ({
 
 const mapDispatch = {
     removeFromCart: actions.removeFromCart,
+    incrementProductAmount: actions.incrementProductAmount,
+    decrementProductAmount: actions.decrementProductAmount,
 };
 
 export default connect(

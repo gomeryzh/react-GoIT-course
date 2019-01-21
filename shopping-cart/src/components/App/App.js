@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import Products from '../Products/ProductsContainer';
 import Cart from '../Cart/CartContainer';
+import CartLink from '../CartLink/CartLinkContainer';
 
 import s from './App.module.css';
 
@@ -22,6 +23,7 @@ const App = () => (
                     <Link to="/cart">Cart</Link>
                 </li>
             </ul>
+            <CartLink />
         </header>
 
         <Switch>

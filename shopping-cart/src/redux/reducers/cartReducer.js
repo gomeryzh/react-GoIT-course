@@ -31,6 +31,18 @@ const amount = (state = {}, { type, payload }) => {
             const { [payload.id]: _, ...newState } = state;
             return newState;
 
+        case actionTypes.INCREMENT_PRODUCT_AMOUNT:
+            return {
+                ...state,
+                [payload.id]: state[payload.id] ? state[payload.id] + 1 : 1,
+            };
+
+        case actionTypes.DECREMENT_PRODUCT_AMOUNT:
+            return {
+                ...state,
+                [payload.id]: state[payload.id] ? state[payload.id] - 1 : 0,
+            };
+
         default:
             return state;
     }
