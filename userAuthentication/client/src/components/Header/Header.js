@@ -1,13 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as selectors from '../../redux/selectors';
+import { signOut } from '../../redux/operations';
 import UserProfile from '../UserProfile/UserProfile';
 import AuthNav from '../AuthNav/AuthNav';
 import classes from './Header.module.css';
 
-const Header = ({ isAuthenticated }) => (
+const Header = ({ isAuthenticated, onSignOut }) => (
   <header className={classes.header}>
-    <AuthNav />
-    <UserProfile />
+    {isAuthenticated ? <UserProfile onSignOut={onSignOut} /> : <AuthNav />}
   </header>
 );
 
-export default Header;
+const mapState = state => ({
+  isAuthenticated: selectors.isAuthenticated(state)
+});
+
+const mapDispatch = {
+  onSignOut: signOut
+};
+
+export default connect(
+  mapState,
+  mapDispatch
+)(Header);

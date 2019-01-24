@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { signUp } from '../../redux/operations';
 import Form from '../common/Form/Form';
 import Input from '../common/Input/Input';
 import Label from '../common/Label/Label';
@@ -6,7 +8,7 @@ import Button from '../common/Button/Button';
 
 const INITIAL_STATE = { login: '', email: '', password: '' };
 
-export default class SignUpForm extends Component {
+class SignUpForm extends Component {
   state = { ...INITIAL_STATE };
 
   handleChange = ({ target: { name, value } }) => {
@@ -61,3 +63,12 @@ export default class SignUpForm extends Component {
     );
   }
 }
+
+const mapDispatch = {
+  onSubmit: signUp
+};
+
+export default connect(
+  null,
+  mapDispatch
+)(SignUpForm);
