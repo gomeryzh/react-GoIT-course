@@ -1,17 +1,33 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { SignIn, SignUp } from '../../pages';
-import Header from '../Header/Header';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Switch, Route } from "react-router-dom";
+import * as operations from "../../redux/operations";
+import { SignIn, SignUp } from "../../pages";
+import Header from "../Header/Header";
 
-const App = () => (
-  <div className="App">
-    <Header />
+class App extends Component {
+  componentDidMount() {
+    this.props.refreshCurrenUser();
+  }
+  render() {
+    return (
+      <div className="App">
+        <Header />
 
-    <Switch>
-      <Route path="/signup" component={SignUp} />
-      <Route path="/signin" component={SignIn} />
-    </Switch>
-  </div>
-);
+        <Switch>
+          <Route path="/signup" component={SignUp} />
+          <Route path="/signin" component={SignIn} />
+        </Switch>
+      </div>
+    );
+  }
+}
 
-export default App;
+const mapDispatch = {
+  refreshCurrenUser: operations.refreshCurrenUser
+};
+
+export default connect(
+  null,
+  mapDispatch
+)(App);
