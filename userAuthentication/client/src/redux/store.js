@@ -1,16 +1,33 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import sessionReducer from './sessionReducer';
 
+const rootPersistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['cart']
+};
+
+const sessionPersistConfig = {
+  key: 'session',
+  storage,
+  whitelist: ['token']
+};
+
 const rootReducer = combineReducers({
-  session: sessionReducer
+  session: persistReducer(sessionPersistConfig, sessionReducer),
+  cart: (state = []) => state
 });
+
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 const middleware = [thunk];
 
 const enhancer = composeWithDevTools(applyMiddleware(...middleware));
 
-const store = createStore(rootReducer, enhancer);
+export const store = createStore(persistedReducer, enhancer);
 
-export default store;
+export const persistor = persistStore(store);
