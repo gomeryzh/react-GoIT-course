@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
+import * as operations from '../../redux/operations';
 import { SignIn, SignUp } from '../../pages';
 import Header from '../Header/Header';
 
@@ -24,4 +26,11 @@ const App = () => (
   </div>
 );
 
-export default App;
+const mapDispatch = {
+  refreshCurrenUser: operations.refreshCurrenUser
+};
+
+export default connect(
+  null,
+  mapDispatch
+)(App);
