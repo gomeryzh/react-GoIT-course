@@ -5,9 +5,11 @@ import { signOut } from '../../redux/operations';
 import UserProfile from '../UserProfile/UserProfile';
 import AuthNav from '../AuthNav/AuthNav';
 import classes from './Header.module.css';
+import AppNav from '../AppNav/AppNav';
 
 const Header = ({ isAuthenticated, user, onSignOut }) => (
   <header className={classes.header}>
+    <AppNav isAuthenticated={isAuthenticated} />
     {isAuthenticated ? (
       <UserProfile onSignOut={onSignOut} user={user} />
     ) : (
