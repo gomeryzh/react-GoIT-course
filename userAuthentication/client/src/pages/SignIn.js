@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { isAuthenticated } from '../redux/selectors';
 import SignInForm from '../components/SignInForm/SignInForm';
 
-export default class SignIn extends Component {
+class SignIn extends Component {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.isAuthenticated) {
+      const { from } = this.props.location.state || { from: { pathname: '/' } };
+      this.props.history.push(from);
+    }
+  }
+
   render() {
     return (
       <div>
@@ -13,3 +22,9 @@ export default class SignIn extends Component {
     );
   }
 }
+
+const mapState = state => ({
+  isAuthenticated: isAuthenticated(state)
+});
+
+export default connect(mapState)(SignIn);

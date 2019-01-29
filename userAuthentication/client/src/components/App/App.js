@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import * as operations from '../../redux/operations';
@@ -18,8 +18,16 @@ const App = () => (
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/about" component={About} />
-      <Route path="/profile" component={Profile} />
-      <ProtectedRoute path="/dashboard" component={Dashboard} />
+      <ProtectedRoute
+        path="/profile"
+        redirectTo="/signin"
+        component={Profile}
+      />
+      <ProtectedRoute
+        path="/dashboard"
+        redirectTo="/signin"
+        component={Dashboard}
+      />
       <Route path="/signup" component={SignUp} />
       <Route path="/signin" component={SignIn} />
     </Switch>

@@ -3,11 +3,25 @@ import { connect } from 'react-redux';
 import { isAuthenticated } from '../../redux/selectors';
 import { Route, Redirect } from 'react-router-dom';
 
-const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => (
+const ProtectedRoute = ({
+  component: Component,
+  redirectTo = '/',
+  isAuthenticated,
+  ...rest
+}) => (
   <Route
     {...rest}
     render={props =>
-      isAuthenticated ? <Component {...props} /> : <Redirect to="signin" />
+      isAuthenticated ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: redirectTo,
+            state: { from: props.location }
+          }}
+        />
+      )
     }
   />
 );

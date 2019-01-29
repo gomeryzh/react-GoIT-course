@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import withRedirect from '../components/HOC/withRedirect';
 import SignUpForm from '../components/SignUpForm/SignUpForm';
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   render() {
     return (
       <div>
@@ -13,3 +14,5 @@ export default class SignUp extends Component {
     );
   }
 }
+
+export default withRedirect(SignUp);
